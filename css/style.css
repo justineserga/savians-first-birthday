@@ -1,0 +1,216 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Baloo+2:wght@400;500;600;700;800&display=swap');
+
+:root{
+  --sky-top:#8FD3F4;
+  --sky-bottom:#C9ECFB;
+  --mtn-back:#9F8FD6;
+  --mtn-front:#6E9F6B;
+  --snow:#FFFFFF;
+  --pine:#2F7A4F;
+  --pine-dark:#1F5236;
+  --paper:#FFF7E4;
+  --card:#FFFDF6;
+  --outline:#2B2118;
+  --text:#2B2118;
+  --text-soft:#5B4B3A;
+  --red:#E8462B;
+  --yellow:#F6B93B;
+  --blue:#4FA8D8;
+  --green:#2F7A4F;
+  --pink:#FF7FA8;
+  --peach:#FFD9B3;
+  --coat1:#7B5EA7;
+  --coat2:#E07A3F;
+  --wood:#8a5a35;
+  --sign:#c98a4b;
+}
+
+*{box-sizing:border-box;}
+html{ -webkit-text-size-adjust:100%; }
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--text);
+  font-family:'Baloo 2', ui-rounded, system-ui, sans-serif;
+  overflow-x:hidden;
+}
+h1,h2,h3,.display{
+  font-family:'Luckiest Guy', 'Baloo 2', cursive;
+  letter-spacing:.5px;
+  text-wrap:balance;
+  margin:0;
+}
+a{ color:inherit; text-decoration:none; }
+img{ max-width:100%; }
+
+/* ---------- snow ---------- */
+.snowfall{ position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:1; }
+.flake{ position:absolute; top:-10%; color:#fff; text-shadow:0 0 2px rgba(43,33,24,.25); animation:fall linear infinite; }
+@keyframes fall{
+  to{ transform:translateY(115vh) translateX(var(--drift,0px)); }
+}
+@media (prefers-reduced-motion:reduce){
+  .flake{ animation:none; display:none; }
+}
+
+/* ---------- nav ---------- */
+.nav{
+  position:fixed; top:0; left:0; right:0; z-index:50;
+  display:flex; justify-content:center; flex-wrap:wrap; gap:10px;
+  padding:calc(env(safe-area-inset-top,0px) + 12px) 16px 10px;
+  background:linear-gradient(to bottom, rgba(255,247,228,.97), rgba(255,247,228,.85) 80%, transparent);
+}
+.nav a{
+  display:inline-block;
+  font-family:'Baloo 2', sans-serif; font-weight:800; font-size:.95rem;
+  padding:10px 18px; border:3px solid var(--outline); border-radius:12px 12px 5px 5px;
+  cursor:pointer; background:var(--yellow); color:var(--outline);
+  box-shadow:3px 3px 0 var(--outline);
+  transition:transform .12s ease;
+}
+.nav a:hover{ transform:translateY(-2px); }
+.nav a:active{ transform:translateY(1px); box-shadow:1px 1px 0 var(--outline); }
+.nav a.active{ background:var(--red); color:#fff; transform:translateY(-3px); }
+.nav a:focus-visible{ outline:3px solid var(--blue); outline-offset:2px; }
+
+main{ position:relative; z-index:2; padding-top:78px; max-width:920px; margin:0 auto; padding-inline:16px; }
+section{ padding-block:20px 60px; }
+
+.eyebrow{
+  display:inline-block; font-weight:800; font-size:.8rem; letter-spacing:1.5px;
+  text-transform:uppercase; color:var(--text-soft); background:#fff;
+  border:2px dashed var(--text-soft); border-radius:999px; padding:4px 14px;
+  margin-bottom:10px;
+}
+
+/* ---------- hero ---------- */
+.hero-title{ font-size:clamp(2.1rem, 7vw, 3.6rem); text-align:center; margin:6px 0 2px; line-height:1.05; }
+.hero-title span{ text-shadow:2px 2px 0 var(--outline); }
+.hero-sub{ text-align:center; font-weight:700; font-size:clamp(1rem,2.6vw,1.3rem); color:var(--text-soft); margin:0 0 22px; }
+.hero-sub b{ color:var(--red); }
+
+.scene-wrap{
+  position:relative; max-width:640px; margin:0 auto; border:6px solid var(--outline); border-radius:22px;
+  overflow:hidden; box-shadow:6px 6px 0 var(--outline); background:var(--sky-bottom);
+}
+.scene-wrap svg{ display:block; width:100%; height:auto; }
+.hint{ text-align:center; font-weight:700; color:var(--text-soft); margin-top:10px; font-size:.95rem; }
+
+.photo-stage{
+  position:absolute; left:50%; bottom:1%; height:92%;
+  transform:translateX(-50%); pointer-events:none;
+}
+.photo-shadow{
+  position:absolute; left:50%; bottom:-1%; width:58%; height:14px; transform:translateX(-50%);
+  background:var(--outline); opacity:.2; border-radius:50%; filter:blur(4px);
+}
+.baby-photo{
+  display:block; height:100%; width:auto;
+  filter:
+    drop-shadow(3px 0 0 var(--outline)) drop-shadow(-3px 0 0 var(--outline))
+    drop-shadow(0 3px 0 var(--outline)) drop-shadow(0 -3px 0 var(--outline))
+    drop-shadow(2px 2px 0 var(--outline)) drop-shadow(-2px -2px 0 var(--outline))
+    drop-shadow(2px -2px 0 var(--outline)) drop-shadow(-2px 2px 0 var(--outline))
+    drop-shadow(0 8px 10px rgba(43,33,24,.35));
+}
+
+.photo-strip{ display:flex; justify-content:center; flex-wrap:wrap; gap:16px; margin-top:30px; }
+.polaroid{
+  background:#fff; border:3px solid var(--outline); border-radius:10px; padding:7px 7px 13px;
+  box-shadow:4px 4px 0 var(--outline); width:100px;
+}
+.polaroid img{ width:100%; border-radius:5px; display:block; }
+.polaroid:nth-child(1){ transform:rotate(-7deg); }
+.polaroid:nth-child(2){ transform:rotate(4deg); }
+.polaroid:nth-child(3){ transform:rotate(-3deg); }
+.polaroid:nth-child(4){ transform:rotate(6deg); }
+.photo-strip-cap{ text-align:center; font-weight:700; color:var(--text-soft); margin-top:8px; font-size:.9rem; }
+
+.party-sign{
+  max-width:520px; margin:28px auto 0; background:var(--card); border:4px solid var(--outline);
+  border-radius:16px; padding:18px 22px; box-shadow:5px 5px 0 var(--outline);
+  clip-path:polygon(0% 2%,2% 0%,98% 0%,100% 3%,100% 97%,98% 100%,2% 100%,0% 98%);
+}
+.party-sign h3{ margin:0 0 10px; font-size:1.4rem; color:var(--red); text-align:center; }
+.sign-row{ display:flex; gap:10px; align-items:baseline; font-weight:700; padding:5px 0; border-bottom:2px dotted #e3d9c4; }
+.sign-row:last-child{ border-bottom:none; }
+.sign-row .label{ min-width:78px; color:var(--text-soft); }
+.fill{
+  border:2px dashed var(--blue); border-radius:8px; padding:2px 10px; color:var(--blue);
+  background:#eef8fd; font-weight:800;
+}
+
+/* ---------- section headers ---------- */
+.page-head{ text-align:center; margin-bottom:26px; }
+.page-head h2{ font-size:clamp(1.8rem,5vw,2.6rem); color:var(--red); margin:4px 0 6px; text-shadow:2px 2px 0 var(--outline); }
+.page-head p{ color:var(--text-soft); font-weight:600; max-width:60ch; margin:0 auto; }
+
+/* ---------- godparent cards ---------- */
+.card-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:18px; }
+.god-card{
+  background:var(--card); border:4px solid var(--outline); border-radius:16px; padding:18px 14px 16px;
+  text-align:center; box-shadow:5px 5px 0 var(--outline); position:relative;
+}
+.god-card .tag{
+  position:absolute; top:-12px; left:50%; transform:translateX(-50%);
+  font-size:.72rem; font-weight:800; letter-spacing:1px; text-transform:uppercase;
+  padding:3px 10px; border-radius:999px; border:2px solid var(--outline); color:#fff;
+}
+.god-card.ninong .tag{ background:var(--blue); }
+.god-card.ninang .tag{ background:var(--pink); }
+.avatar{
+  width:78px; height:78px; margin:14px auto 12px; border-radius:50%; border:4px solid var(--outline);
+  display:flex; align-items:center; justify-content:center; font-family:'Luckiest Guy';
+  font-size:1.6rem; color:#fff;
+}
+.god-card.ninong .avatar{ background:var(--blue); }
+.god-card.ninang .avatar{ background:var(--pink); }
+.god-card .name{ font-weight:800; font-size:1.05rem; }
+.god-card .role{ color:var(--text-soft); font-weight:600; font-size:.85rem; margin-top:2px; }
+.edit-hint{ text-align:center; margin-top:22px; font-weight:700; color:var(--text-soft); font-size:.9rem; }
+
+/* ---------- venues ---------- */
+.venue-card{
+  background:var(--card); border:4px solid var(--outline); border-radius:18px; padding:20px;
+  box-shadow:5px 5px 0 var(--outline); margin-bottom:22px; display:grid; gap:16px;
+  grid-template-columns:140px 1fr; align-items:center;
+}
+.venue-icon{
+  width:110px; height:110px; border-radius:16px; border:4px solid var(--outline);
+  display:flex; align-items:center; justify-content:center; font-size:2.6rem;
+}
+.venue-card.mass .venue-icon{ background:#e9e4ff; }
+.venue-card.party .venue-icon{ background:#ffe9d6; }
+.venue-card h3{ margin:0 0 6px; font-size:1.3rem; }
+.venue-line{ font-weight:700; color:var(--text-soft); margin:2px 0; }
+@media (max-width:480px){
+  .venue-card{ grid-template-columns:1fr; text-align:center; }
+  .venue-icon{ margin:0 auto; }
+}
+
+/* ---------- mini game ---------- */
+.game-wrap{
+  max-width:640px; margin:0 auto; text-align:center;
+}
+.game-canvas-frame{
+  position:relative; border:6px solid var(--outline); border-radius:18px; overflow:hidden;
+  box-shadow:6px 6px 0 var(--outline); background:var(--sky-bottom); touch-action:none;
+}
+#gameCanvas{ display:block; width:100%; height:auto; image-rendering:pixelated; }
+.game-controls{ margin-top:16px; display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }
+.game-btn{
+  font-family:'Baloo 2', sans-serif; font-weight:800; font-size:1rem;
+  padding:12px 26px; border:3px solid var(--outline); border-radius:12px 12px 5px 5px;
+  cursor:pointer; background:var(--blue); color:#fff;
+  box-shadow:3px 3px 0 var(--outline); transition:transform .12s ease;
+}
+.game-btn:hover{ transform:translateY(-2px); }
+.game-btn:active{ transform:translateY(1px); box-shadow:1px 1px 0 var(--outline); }
+.game-help{ margin-top:14px; color:var(--text-soft); font-weight:600; font-size:.9rem; }
+.game-help kbd{
+  font-family:inherit; font-weight:800; background:#fff; border:2px solid var(--outline);
+  border-radius:6px; padding:1px 8px; box-shadow:2px 2px 0 var(--outline);
+}
+
+footer{ text-align:center; padding:30px 16px 40px; color:var(--text-soft); font-weight:700; font-size:.85rem; }
+footer .heart{ color:var(--red); }
