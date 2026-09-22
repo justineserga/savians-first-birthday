@@ -9,10 +9,11 @@
 // Until you fill these in, Birthday Flappy still works fully offline —
 // the leaderboard panel will just show a "not connected yet" message.
 window.SAVIAN_FIREBASE_CONFIG = {
-  apiKey: 'YOUR_API_KEY',
-  authDomain: 'YOUR_PROJECT_ID.firebaseapp.com',
-  projectId: 'YOUR_PROJECT_ID',
-  storageBucket: 'YOUR_PROJECT_ID.appspot.com',
-  messagingSenderId: 'YOUR_SENDER_ID',
-  appId: 'YOUR_APP_ID'
+  apiKey: 'AIzaSyAYfdRSE4FLwt2n1CsUe4oLmWcVwcK9GhI',
+  authDomain: 'savians-first-birthday.firebaseapp.com',
+  projectId: 'savians-first-birthday',
+  storageBucket: 'savians-first-birthday.firebasestorage.app',
+  messagingSenderId: '800233229875',
+  appId: '1:800233229875:web:1f97440b6319302b661d46'
 };
+
