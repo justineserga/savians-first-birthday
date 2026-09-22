@@ -14,18 +14,14 @@
 
   // ---- godparent placeholder cards (ninongs.html only) ----
   var grid = document.getElementById('godparentGrid');
-  if(grid){
-    var people = [
-      {role:'ninong', label:'Ninong', n:1}, {role:'ninong', label:'Ninong', n:2}, {role:'ninong', label:'Ninong', n:3},
-      {role:'ninang', label:'Ninang', n:1}, {role:'ninang', label:'Ninang', n:2}, {role:'ninang', label:'Ninang', n:3}
-    ];
-    people.forEach(function(p){
+  if(grid && window.SAVIAN_PEOPLE){
+    window.SAVIAN_PEOPLE.forEach(function(p){
       var card = document.createElement('div');
       card.className = 'god-card ' + p.role;
       card.innerHTML =
         '<span class="tag">' + (p.role === 'ninong' ? 'Godfather' : 'Godmother') + '</span>' +
         '<div class="avatar">' + p.label.charAt(0) + p.n + '</div>' +
-        '<div class="name">' + p.label + ' ' + p.n + '’s Name</div>' +
+        '<div class="name">' + p.name + '</div>' +
         '<div class="role">Add relation / message</div>';
       grid.appendChild(card);
     });

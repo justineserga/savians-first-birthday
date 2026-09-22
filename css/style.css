@@ -192,10 +192,13 @@ section{ padding-block:20px 60px; }
 .game-wrap{
   max-width:640px; margin:0 auto; text-align:center;
 }
+.flappy-panel-title{ font-size:1.5rem; color:var(--red); margin-bottom:16px; text-shadow:2px 2px 0 var(--outline); }
+
 .game-canvas-frame{
   position:relative; border:6px solid var(--outline); border-radius:18px; overflow:hidden;
   box-shadow:6px 6px 0 var(--outline); background:var(--sky-bottom); touch-action:none;
 }
+.flappy-frame{ max-width:360px; margin:0 auto; }
 #gameCanvas{ display:block; width:100%; height:auto; image-rendering:pixelated; touch-action:none; }
 .game-controls{ margin-top:16px; display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }
 .game-btn{
@@ -207,11 +210,59 @@ section{ padding-block:20px 60px; }
 }
 .game-btn:hover{ transform:translateY(-2px); }
 .game-btn:active{ transform:translateY(1px); box-shadow:1px 1px 0 var(--outline); }
+.game-btn.secondary{ background:var(--yellow); color:var(--outline); font-size:1rem; padding:14px 26px; }
 .game-help{ margin-top:14px; color:var(--text-soft); font-weight:600; font-size:.9rem; }
 .game-help kbd{
   font-family:inherit; font-weight:800; background:#fff; border:2px solid var(--outline);
   border-radius:6px; padding:1px 8px; box-shadow:2px 2px 0 var(--outline);
 }
+
+/* ---------- player select ---------- */
+.player-grid{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px;
+  max-width:520px; margin:0 auto;
+}
+.player-btn{
+  display:flex; flex-direction:column; align-items:center; gap:8px;
+  font-family:'Baloo 2', sans-serif; font-weight:800; font-size:1rem;
+  padding:16px 10px; border:3px solid var(--outline); border-radius:14px;
+  cursor:pointer; background:var(--card); color:var(--outline);
+  box-shadow:4px 4px 0 var(--outline); transition:transform .12s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.player-btn:hover{ transform:translateY(-3px); }
+.player-btn:active{ transform:translateY(1px); box-shadow:1px 1px 0 var(--outline); }
+.player-avatar{
+  width:52px; height:52px; border-radius:50%; border:3px solid var(--outline);
+  display:flex; align-items:center; justify-content:center; font-family:'Luckiest Guy';
+  font-size:1.1rem; color:#fff;
+}
+.player-btn.ninong .player-avatar{ background:var(--blue); }
+.player-btn.ninang .player-avatar{ background:var(--pink); }
+
+.playing-as{ font-weight:700; color:var(--text-soft); margin-bottom:14px; }
+.playing-as strong{ color:var(--red); }
+.link-btn{
+  background:none; border:none; padding:0; margin:0; cursor:pointer;
+  color:var(--blue); font-weight:800; font-family:inherit; font-size:inherit;
+  text-decoration:underline; text-underline-offset:2px;
+}
+
+/* ---------- leaderboard ---------- */
+.leaderboard-list{
+  list-style:none; margin:0 auto; padding:0; max-width:420px;
+  display:flex; flex-direction:column; gap:8px;
+}
+.leaderboard-row{
+  display:grid; grid-template-columns:32px 1fr auto; align-items:center; gap:10px;
+  background:var(--card); border:3px solid var(--outline); border-radius:10px;
+  padding:10px 14px; box-shadow:3px 3px 0 var(--outline); text-align:left;
+}
+.leaderboard-row:nth-child(1){ background:#FFF2CC; }
+.lb-rank{ font-family:'Luckiest Guy'; color:var(--red); font-size:1.1rem; }
+.lb-name{ font-weight:700; }
+.lb-score{ font-family:'Luckiest Guy'; color:var(--blue); font-size:1.2rem; }
+.leaderboard-status{ color:var(--text-soft); font-weight:600; margin-top:10px; }
 
 footer{ text-align:center; padding:30px 16px 40px; color:var(--text-soft); font-weight:700; font-size:.85rem; }
 footer .heart{ color:var(--red); }

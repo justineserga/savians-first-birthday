@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Savian's Big Run · Savian's First Birthday</title>
-<meta name="description" content="A birthday mini game starring Savian — jump the presents and see how far you get!">
+<title>Birthday Flappy · Savian's First Birthday</title>
+<meta name="description" content="Pick your Ninong or Ninang and see who can fly Savian the farthest — Birthday Flappy, with a live leaderboard.">
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="css/style.css">
 </head>
@@ -16,25 +16,50 @@
   <a href="index.html">🏔️ Home</a>
   <a href="ninongs.html">🎁 Ninongs &amp; Ninangs</a>
   <a href="venues.html">📍 Venues</a>
-  <a href="game.html" class="active">🎮 Mini Game</a>
+  <a href="game.html" class="active">🐣 Birthday Flappy</a>
 </nav>
 
 <main>
   <section id="game">
     <div class="page-head">
       <p class="eyebrow">no wifi at the party? play this!</p>
-      <h2>Savian's Big Run</h2>
-      <p>Help baby Savian dash through Maple Peak and hop over the presents. How far can he go?</p>
+      <h2>Birthday Flappy</h2>
+      <p>Pick your Ninong or Ninang, flap baby Savian through the presents, and climb the leaderboard!</p>
     </div>
 
     <div class="game-wrap">
-      <div class="game-canvas-frame">
-        <canvas id="gameCanvas" width="600" height="220" aria-label="Savian's Big Run mini game"></canvas>
+
+      <!-- ===== Player select ===== -->
+      <div class="flappy-panel" id="playerSelect">
+        <h3 class="flappy-panel-title">🙋 Who's Playing?</h3>
+        <div class="player-grid" id="playerGrid"></div>
+        <p class="game-help">Names are placeholders for now — the real Ninongs &amp; Ninangs list will replace these.</p>
       </div>
-      <div class="game-controls">
-        <button type="button" class="game-btn" id="jumpBtn">⬆️ Jump</button>
+
+      <!-- ===== Game ===== -->
+      <div class="flappy-panel" id="gamePanel" hidden>
+        <p class="playing-as">Playing as <strong id="playingAsName">—</strong> · <button type="button" class="link-btn" id="changePlayerBtn">change player</button></p>
+        <div class="game-canvas-frame flappy-frame">
+          <canvas id="gameCanvas" width="360" height="540" aria-label="Birthday Flappy mini game"></canvas>
+        </div>
+        <div class="game-controls">
+          <button type="button" class="game-btn" id="flapBtn">🐣 Flap</button>
+          <button type="button" class="game-btn secondary" id="viewLeaderboardBtn">🏆 Leaderboard</button>
+        </div>
+        <p class="game-help">Press <kbd>Space</kbd> or <kbd>↑</kbd> to flap — or tap the canvas / button on mobile.</p>
       </div>
-      <p class="game-help">Press <kbd>Space</kbd> or <kbd>↑</kbd> to jump — or tap the canvas / button on mobile. Press again to restart after a crash.</p>
+
+      <!-- ===== Leaderboard ===== -->
+      <div class="flappy-panel" id="leaderboardPanel" hidden>
+        <h3 class="flappy-panel-title">🏆 Leaderboard</h3>
+        <ol class="leaderboard-list" id="leaderboardList"></ol>
+        <p class="leaderboard-status" id="leaderboardStatus"></p>
+        <div class="game-controls">
+          <button type="button" class="game-btn" id="playAgainBtn">🐣 Play Again</button>
+          <button type="button" class="game-btn secondary" id="refreshLeaderboardBtn">↻ Refresh</button>
+        </div>
+      </div>
+
     </div>
   </section>
 </main>
@@ -43,7 +68,9 @@
   <span class="heart">♥</span> Made for Savian Art A. Serga's 1st Birthday <span class="heart">♥</span>
 </footer>
 
+<script src="js/people.js"></script>
 <script src="js/site.js"></script>
-<script src="js/game.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/flappy.js"></script>
 </body>
 </html>
