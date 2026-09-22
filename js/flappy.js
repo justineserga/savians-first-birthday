@@ -42,11 +42,21 @@
   async function fetchLeaderboard(){
     if(!firebaseReady) return null;
     try {
-      var q = fs.query(fs.collection(db, 'scores'), fs.orderBy('score', 'desc'), fs.limit(10));
+      // Pull more than we need, then keep only each player's best score —
+      // the query is already sorted desc, so the first row seen per name is their best.
+      var q = fs.query(fs.collection(db, 'scores'), fs.orderBy('score', 'desc'), fs.limit(50));
       var snap = await fs.getDocs(q);
-      var rows = [];
-      snap.forEach(function(doc){ rows.push(doc.data()); });
-      return rows;
+      var bestByName = {};
+      var order = [];
+      snap.forEach(function(doc){
+        var d = doc.data();
+        var key = String(d.name || '').trim().toLowerCase();
+        if(!(key in bestByName)){
+          bestByName[key] = d;
+          order.push(key);
+        }
+      });
+      return order.map(function(key){ return bestByName[key]; }).slice(0, 10);
     } catch(e){
       console.error('fetchLeaderboard failed:', e);
       return null;
@@ -107,7 +117,9 @@
   var BIRD_X = 90;
   var PIPE_W = 56;
   var GAP_H = 172;
-  var PIPE_SPEED = 2.0;
+  var PIPE_SPEED_BASE = 2.0;
+  var PIPE_SPEED_MAX = 4.5;
+  var PIPE_SPEED_RAMP = 0.05; // speed added per point scored
   var SPAWN_INTERVAL = 150;
 
   var COLORS = {
@@ -189,10 +201,11 @@
     if(spawnTimer <= 0) spawnPipe();
 
     var birdBox = { x: BIRD_X + 6, y: bird.y + 6, w: BIRD_SIZE - 12, h: BIRD_SIZE - 12 };
+    var pipeSpeed = Math.min(PIPE_SPEED_MAX, PIPE_SPEED_BASE + score * PIPE_SPEED_RAMP);
 
     for(var i = pipes.length - 1; i >= 0; i--){
       var p = pipes[i];
-      p.x -= PIPE_SPEED;
+      p.x -= pipeSpeed;
       if(p.x + PIPE_W < 0){ pipes.splice(i, 1); continue; }
 
       if(!p.passed && p.x + PIPE_W < BIRD_X){
