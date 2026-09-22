@@ -5,12 +5,13 @@
   var W = canvas.width, H = canvas.height;
 
   var GROUND_Y = 180;
-  var GRAVITY = 1.0;
-  var JUMP_VELOCITY = -13;
+  var GRAVITY = 0.85;
+  var JUMP_VELOCITY = -12.5;
   var PLAYER_H = 80;
-  var START_SPEED = 4.5;
-  var MAX_SPEED = 11;
-  var SPEED_RAMP = 0.0016;
+  var START_SPEED = 3.0;
+  var MAX_SPEED = 6.5;
+  var SPEED_RAMP = 0.0006;
+  var MIN_SPAWN_FRAMES = 65;
 
   var COLORS = {
     skyTop: '#8FD3F4',
@@ -62,7 +63,7 @@
     obstacles = [];
     speed = START_SPEED;
     score = 0;
-    spawnTimer = 60;
+    spawnTimer = 90;
     groundOffset = 0;
     mtnOffset = 0;
   }
@@ -71,14 +72,14 @@
     var types = ['gift', 'gifttall', 'balloon', 'snowman'];
     var type = types[Math.floor(Math.random() * types.length)];
     var w, h;
-    if(type === 'gift'){ w = 34; h = 34; }
-    else if(type === 'gifttall'){ w = 30; h = 50; }
-    else if(type === 'balloon'){ w = 24; h = 56; }
-    else { w = 40; h = 48; }
+    if(type === 'gift'){ w = 34; h = 30; }
+    else if(type === 'gifttall'){ w = 30; h = 42; }
+    else if(type === 'balloon'){ w = 24; h = 46; }
+    else { w = 40; h = 42; }
     obstacles.push({ x: W + 20, w: w, h: h, type: type });
 
-    var gap = 230 + Math.random() * 170;
-    spawnTimer = gap / speed;
+    var gap = 260 + Math.random() * 180;
+    spawnTimer = Math.max(MIN_SPAWN_FRAMES, gap / speed);
   }
 
   function rectsOverlap(a, b){
@@ -119,8 +120,8 @@
     if(spawnTimer <= 0) spawnObstacle();
 
     var playerBox = {
-      x: player.x + 10, y: player.y + player.bob + 8,
-      w: 30, h: PLAYER_H - 14
+      x: player.x + 14, y: player.y + player.bob + 12,
+      w: 22, h: PLAYER_H - 24
     };
 
     for(var i = obstacles.length - 1; i >= 0; i--){
@@ -254,11 +255,11 @@
   function drawHUD(){
     ctx.textAlign = 'right';
     ctx.fillStyle = COLORS.outline;
-    ctx.font = "bold 16px 'Baloo 2', sans-serif";
-    ctx.fillText('Score ' + Math.floor(score), W - 14, 26);
-    ctx.font = "bold 12px 'Baloo 2', sans-serif";
+    ctx.font = "bold 19px 'Baloo 2', sans-serif";
+    ctx.fillText('Score ' + Math.floor(score), W - 14, 28);
+    ctx.font = "bold 14px 'Baloo 2', sans-serif";
     ctx.fillStyle = '#5B4B3A';
-    ctx.fillText('Best ' + Math.max(getHighScore(), Math.floor(score)), W - 14, 44);
+    ctx.fillText('Best ' + Math.max(getHighScore(), Math.floor(score)), W - 14, 48);
     ctx.textAlign = 'left';
   }
 
@@ -267,12 +268,12 @@
     ctx.fillRect(0, 0, W, H);
     ctx.textAlign = 'center';
     ctx.fillStyle = COLORS.outline;
-    ctx.font = "bold 22px 'Luckiest Guy', 'Baloo 2', sans-serif";
-    ctx.fillText(lines[0], W / 2, H / 2 - 14);
-    ctx.font = "bold 14px 'Baloo 2', sans-serif";
+    ctx.font = "bold 26px 'Luckiest Guy', 'Baloo 2', sans-serif";
+    ctx.fillText(lines[0], W / 2, H / 2 - 16);
+    ctx.font = "bold 17px 'Baloo 2', sans-serif";
     ctx.fillStyle = '#5B4B3A';
     for(var i = 1; i < lines.length; i++){
-      ctx.fillText(lines[i], W / 2, H / 2 + 10 + (i - 1) * 20);
+      ctx.fillText(lines[i], W / 2, H / 2 + 12 + (i - 1) * 24);
     }
     ctx.textAlign = 'left';
   }

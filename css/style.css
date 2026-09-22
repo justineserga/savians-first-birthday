@@ -196,13 +196,14 @@ section{ padding-block:20px 60px; }
   position:relative; border:6px solid var(--outline); border-radius:18px; overflow:hidden;
   box-shadow:6px 6px 0 var(--outline); background:var(--sky-bottom); touch-action:none;
 }
-#gameCanvas{ display:block; width:100%; height:auto; image-rendering:pixelated; }
+#gameCanvas{ display:block; width:100%; height:auto; image-rendering:pixelated; touch-action:none; }
 .game-controls{ margin-top:16px; display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }
 .game-btn{
-  font-family:'Baloo 2', sans-serif; font-weight:800; font-size:1rem;
-  padding:12px 26px; border:3px solid var(--outline); border-radius:12px 12px 5px 5px;
-  cursor:pointer; background:var(--blue); color:#fff;
+  font-family:'Baloo 2', sans-serif; font-weight:800; font-size:1.1rem;
+  padding:16px 32px; border:3px solid var(--outline); border-radius:12px 12px 5px 5px;
+  cursor:pointer; background:var(--blue); color:#fff; touch-action:manipulation;
   box-shadow:3px 3px 0 var(--outline); transition:transform .12s ease;
+  -webkit-tap-highlight-color:transparent; user-select:none;
 }
 .game-btn:hover{ transform:translateY(-2px); }
 .game-btn:active{ transform:translateY(1px); box-shadow:1px 1px 0 var(--outline); }
