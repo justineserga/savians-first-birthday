@@ -1,13 +1,13 @@
 # Savian's First Birthday 🎉
 
-A front-end only, static website celebrating Savian Art A. Serga's 1st birthday — cozy mountain-town cartoon theme, complete with a Flappy-Bird-style mini game and a shared leaderboard.
+A front-end only, static storybook website celebrating Savian Art A. Serga's first birthday. Its peaceful fantasy meadow theme follows the young hero at the start of his first great adventure, with a Flappy-style meadow game and shared leaderboard.
 
 ## Pages
 
-- `index.html` — home page with the party scene, invite details, and a photo strip
+- `index.html` — storybook home page, first-year chapters, photo gallery, and quest-style invitation
 - `ninongs.html` — Ninongs & Ninangs (godparents)
 - `venues.html` — mass and celebration venue details
-- `game.html` — **Birthday Flappy**: pick a Ninong/Ninang, flap Savian through the presents, and climb the leaderboard
+- `game.html` — **Meadow Flight**: pick a Ninong/Ninang, guide Savian through old forest ruins, and climb the leaderboard
 
 ## Tech stack
 
@@ -28,8 +28,8 @@ The **leaderboard** is the one piece that isn't purely local: to show everyone's
 │   ├── people.js              # shared Ninong/Ninang roster (edit this to update names everywhere)
 │   ├── site.js                  # nav/snow/godparent-card behavior shared across pages
 │   ├── firebase-config.js         # your Firebase project keys (see setup below)
-│   └── flappy.js                    # Birthday Flappy game + leaderboard logic
-└── assets/img/                        # photos and game sprites
+│   └── flappy.js                    # Meadow Flight game + leaderboard logic
+└── assets/img/                      # photos and game sprites, including savi-himmel.png
 ```
 
 ## Running locally
@@ -50,9 +50,9 @@ Then open `http://localhost:<port>/index.html`.
 
 Search each HTML page for `Add ...` placeholders (date, time, venue) and swap in the real details.
 
-To update the Ninong/Ninang names (used on both the Ninongs & Ninangs page and the Birthday Flappy player picker), edit the single list in **`js/people.js`** — every page picks it up automatically.
+To update the Ninong/Ninang names (used on both the Ninongs & Ninangs page and the Meadow Flight player picker), edit the single list in **`js/people.js`** — every page picks it up automatically.
 
-## Birthday Flappy controls
+## Meadow Flight controls
 
 - **Desktop:** Space or ↑ to flap
 - **Mobile:** tap the game canvas or the Flap button

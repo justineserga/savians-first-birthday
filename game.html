@@ -3,60 +3,63 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Birthday Flappy · Savian's First Birthday</title>
-<meta name="description" content="Pick your Ninong or Ninang and see who can fly Savian the farthest — Birthday Flappy, with a live leaderboard.">
+<title>Meadow Flight · Savian's First Chapter</title>
+<meta name="description" content="Choose a Ninong or Ninang and guide Savian through a peaceful fantasy meadow in the birthday mini game.">
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<div class="snowfall" id="snowfall" aria-hidden="true"></div>
+<div class="ambient-particles" id="ambientParticles" aria-hidden="true"></div>
 
-<nav class="nav">
-  <a href="index.html">🏔️ Home</a>
-  <a href="ninongs.html">🎁 Ninongs &amp; Ninangs</a>
-  <a href="venues.html">📍 Venues</a>
-  <a href="game.html" class="active">🐣 Birthday Flappy</a>
+<nav class="nav" aria-label="Main navigation">
+  <a href="index.html" class="brand"><span class="brand-mark">S</span><span>Savian's First Chapter</span></a>
+  <div class="nav-links">
+    <a href="index.html">The Story</a>
+    <a href="ninongs.html">Ninongs &amp; Ninangs</a>
+    <a href="venues.html">Celebration</a>
+    <a href="game.html" class="nav-game active" aria-current="page">Meadow Flight <span aria-hidden="true">↗</span></a>
+  </div>
 </nav>
 
 <main>
   <section id="game">
     <div class="page-head">
-      <p class="eyebrow">no wifi at the party? play this!</p>
-      <h2>Birthday Flappy</h2>
-      <p>Pick your Ninong or Ninang, flap baby Savian through the presents, and climb the leaderboard!</p>
+      <p class="eyebrow">a little side quest</p>
+      <h2>Meadow Flight</h2>
+      <p>Choose a Ninong or Ninang, then guide the young hero through the old forest ruins. How far will your journey go?</p>
     </div>
 
     <div class="game-wrap">
 
       <!-- ===== Player select ===== -->
       <div class="flappy-panel" id="playerSelect">
-        <h3 class="flappy-panel-title">🙋 Who's Playing?</h3>
+        <h3 class="flappy-panel-title">Who will guide the journey?</h3>
         <div class="player-grid" id="playerGrid"></div>
-        <p class="game-help">Names are placeholders for now — the real Ninongs &amp; Ninangs list will replace these.</p>
+        <p class="game-help">The godparent names are temporary placeholders and will be updated later.</p>
       </div>
 
       <!-- ===== Game ===== -->
       <div class="flappy-panel" id="gamePanel" hidden>
         <p class="playing-as">Playing as <strong id="playingAsName">—</strong> · <button type="button" class="link-btn" id="changePlayerBtn">change player</button></p>
         <div class="game-canvas-frame flappy-frame">
-          <canvas id="gameCanvas" width="360" height="540" aria-label="Birthday Flappy mini game"></canvas>
+          <canvas id="gameCanvas" width="360" height="540" aria-label="Meadow Flight birthday mini game"></canvas>
         </div>
         <div class="game-controls">
-          <button type="button" class="game-btn" id="flapBtn">🐣 Flap</button>
-          <button type="button" class="game-btn secondary" id="viewLeaderboardBtn">🏆 Leaderboard</button>
+          <button type="button" class="game-btn" id="flapBtn">Flap to rise</button>
+          <button type="button" class="game-btn secondary" id="viewLeaderboardBtn">Journey log</button>
         </div>
-        <p class="game-help">Press <kbd>Space</kbd> or <kbd>↑</kbd> to flap — or tap the canvas / button on mobile.</p>
+        <p class="game-help">Press <kbd>Space</kbd> or <kbd>↑</kbd> to rise, or tap the meadow on mobile.</p>
       </div>
 
       <!-- ===== Leaderboard ===== -->
       <div class="flappy-panel" id="leaderboardPanel" hidden>
-        <h3 class="flappy-panel-title">🏆 Leaderboard</h3>
+        <h3 class="flappy-panel-title">Journey log</h3>
         <ol class="leaderboard-list" id="leaderboardList"></ol>
         <p class="leaderboard-status" id="leaderboardStatus"></p>
         <div class="game-controls">
-          <button type="button" class="game-btn" id="playAgainBtn">🐣 Play Again</button>
-          <button type="button" class="game-btn secondary" id="refreshLeaderboardBtn">↻ Refresh</button>
+          <button type="button" class="game-btn" id="playAgainBtn">Set out again</button>
+          <button type="button" class="game-btn secondary" id="refreshLeaderboardBtn">Refresh log</button>
         </div>
       </div>
 
@@ -64,8 +67,8 @@
   </section>
 </main>
 
-<footer>
-  <span class="heart">♥</span> Made for Savian Art A. Serga's 1st Birthday <span class="heart">♥</span>
+<footer class="site-footer">
+  <a href="index.html">Savian's First Chapter</a><span>Made with love for Savian Art A. Serga</span><a href="game.html">Take a little flight ↗</a>
 </footer>
 
 <script src="js/people.js"></script>

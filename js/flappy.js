@@ -20,7 +20,7 @@
       db = fs.getFirestore(app);
       firebaseReady = true;
     } catch(e){
-      console.error('Birthday Flappy: leaderboard unavailable —', e);
+      console.error('Meadow Flight: leaderboard unavailable —', e);
       firebaseReady = false;
     }
   }
@@ -123,9 +123,9 @@
   var SPAWN_INTERVAL = 150;
 
   var COLORS = {
-    skyTop: '#8FD3F4', skyBottom: '#C9ECFB',
-    ground: '#FFFFFF', groundLine: '#2B2118', outline: '#2B2118',
-    red: '#E8462B', yellow: '#F6B93B', blue: '#4FA8D8'
+    skyTop: '#9bc4d0', skyBottom: '#e3e8d7',
+    ground: '#778a68', groundLine: '#425b45', outline: '#4c5b4c',
+    stone: '#8b8e7a', stoneLight: '#b5b49b', stoneDark: '#656f5e', moss: '#70835d', gold: '#c2aa6b'
   };
 
   var birdImg = new Image();
@@ -224,21 +224,34 @@
 
   function drawStack(x, y, w, h, fromBottom){
     if(h <= 0) return;
-    var boxH = 30;
+    var boxH = 28;
     var count = Math.ceil(h / boxH);
-    ctx.lineWidth = 3;
+    ctx.lineWidth = 2;
     ctx.strokeStyle = COLORS.outline;
     for(var i = 0; i < count; i++){
       var by = fromBottom ? (y + h - (i + 1) * boxH) : (y + i * boxH);
       var bh = Math.min(boxH, h - i * boxH);
       if(by < y){ bh += (by - y); by = y; }
       if(bh <= 0) continue;
-      ctx.fillStyle = (i % 2 === 0) ? COLORS.red : COLORS.blue;
+      ctx.fillStyle = (i % 2 === 0) ? COLORS.stone : COLORS.stoneDark;
       ctx.fillRect(x, by, w, bh);
       ctx.strokeRect(x, by, w, bh);
-      ctx.fillStyle = COLORS.yellow;
-      ctx.fillRect(x + w / 2 - 3, by, 6, bh);
+      ctx.fillStyle = 'rgba(240,231,195,.2)';
+      ctx.fillRect(x + 6, by + 4, 4, Math.max(2, bh - 9));
     }
+    // A weathered ruin cap and a small moss line make each obstacle part of the landscape.
+    var capY = fromBottom ? y + h - 11 : y;
+    ctx.fillStyle = COLORS.stoneLight;
+    ctx.fillRect(x - 5, capY, w + 10, 11);
+    ctx.strokeStyle = COLORS.outline;
+    ctx.lineWidth = 2;
+    ctx.strokeRect(x - 5, capY, w + 10, 11);
+    ctx.fillStyle = COLORS.moss;
+    ctx.fillRect(x - 3, fromBottom ? capY + 1 : capY - 3, w + 6, 4);
+    ctx.fillStyle = COLORS.gold;
+    ctx.globalAlpha = .55;
+    ctx.fillRect(x + 8, capY + 5, 2, 2);
+    ctx.globalAlpha = 1;
   }
 
   function drawPipe(p){
@@ -253,14 +266,50 @@
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, W, H);
 
+    // Soft afternoon sun and quiet clouds.
+    ctx.fillStyle = 'rgba(246,225,167,.72)';
+    ctx.beginPath(); ctx.arc(290, 92, 31, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = 'rgba(255,253,241,.72)';
+    [[50,102,25],[72,94,31],[96,104,22],[216,151,17],[233,145,22],[251,153,17]].forEach(function(c){
+      ctx.beginPath(); ctx.ellipse(c[0], c[1], c[2], c[2] * .52, 0, 0, Math.PI * 2); ctx.fill();
+    });
+
+    // Distant blue ridges, then overlapping forest-green meadow hills.
+    ctx.fillStyle = '#91acaa';
+    ctx.beginPath(); ctx.moveTo(0, 280); ctx.lineTo(48, 219); ctx.lineTo(86, 260); ctx.lineTo(144, 195); ctx.lineTo(203, 272); ctx.lineTo(261, 211); ctx.lineTo(323, 268); ctx.lineTo(360, 230); ctx.lineTo(360, 382); ctx.lineTo(0, 382); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = '#829b78';
+    ctx.beginPath(); ctx.moveTo(0, 333); ctx.quadraticCurveTo(84, 282, 157, 338); ctx.quadraticCurveTo(249, 282, 360, 331); ctx.lineTo(360, GROUND_Y); ctx.lineTo(0, GROUND_Y); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = '#6e8966';
+    ctx.beginPath(); ctx.moveTo(0, 390); ctx.quadraticCurveTo(74, 342, 155, 388); ctx.quadraticCurveTo(251, 340, 360, 386); ctx.lineTo(360, GROUND_Y); ctx.lineTo(0, GROUND_Y); ctx.closePath(); ctx.fill();
+
+    // Tiny, quiet trees on the far slopes.
+    [[20,327],[39,315],[321,322],[339,331]].forEach(function(t){
+      ctx.fillStyle = '#526f55';
+      ctx.beginPath(); ctx.moveTo(t[0],t[1]-30); ctx.lineTo(t[0]-12,t[1]+5); ctx.lineTo(t[0]+12,t[1]+5); ctx.closePath(); ctx.fill();
+      ctx.fillStyle = '#705f48'; ctx.fillRect(t[0]-2,t[1]+3,4,10);
+    });
+
     ctx.fillStyle = COLORS.ground;
     ctx.fillRect(0, GROUND_Y, W, GROUND_H);
     ctx.strokeStyle = COLORS.groundLine;
-    ctx.lineWidth = 4;
+    ctx.lineWidth = 3;
     ctx.beginPath();
     ctx.moveTo(0, GROUND_Y);
     ctx.lineTo(W, GROUND_Y);
     ctx.stroke();
+    ctx.fillStyle = '#82966d';
+    ctx.fillRect(0, GROUND_Y, W, 6);
+    // Scattered meadow flowers along the path.
+    [[21,514],[74,527],[145,511],[204,526],[279,513],[337,530]].forEach(function(f,i){
+      ctx.strokeStyle = '#536e4c'; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(f[0],f[1]+7); ctx.lineTo(f[0],f[1]-2); ctx.stroke();
+      ctx.fillStyle = i % 2 ? '#f3e9c9' : '#d9d9ad';
+      for(var p=0;p<5;p++){
+        var a=p*Math.PI*2/5;
+        ctx.beginPath(); ctx.arc(f[0]+Math.cos(a)*3,f[1]-4+Math.sin(a)*3,1.8,0,Math.PI*2); ctx.fill();
+      }
+      ctx.fillStyle = '#d0b264'; ctx.beginPath(); ctx.arc(f[0],f[1]-4,1.5,0,Math.PI*2); ctx.fill();
+    });
   }
 
   function drawBird(){
@@ -290,20 +339,20 @@
   function drawHUD(){
     ctx.textAlign = 'center';
     ctx.fillStyle = COLORS.outline;
-    ctx.font = "bold 30px 'Luckiest Guy', 'Baloo 2', sans-serif";
+    ctx.font = "600 30px 'Playfair Display', Georgia, serif";
     ctx.fillText(String(Math.floor(score)), W / 2, 56);
     ctx.textAlign = 'left';
   }
 
   function drawOverlay(lines){
-    ctx.fillStyle = 'rgba(255,247,228,.88)';
+    ctx.fillStyle = 'rgba(244,240,229,.88)';
     ctx.fillRect(0, 0, W, H);
     ctx.textAlign = 'center';
     ctx.fillStyle = COLORS.outline;
-    ctx.font = "bold 26px 'Luckiest Guy', 'Baloo 2', sans-serif";
+    ctx.font = "600 25px 'Playfair Display', Georgia, serif";
     ctx.fillText(lines[0], W / 2, H / 2 - 30);
-    ctx.font = "bold 16px 'Baloo 2', sans-serif";
-    ctx.fillStyle = '#5B4B3A';
+    ctx.font = "600 15px 'DM Sans', sans-serif";
+    ctx.fillStyle = '#526257';
     for(var i = 1; i < lines.length; i++){
       ctx.fillText(lines[i], W / 2, H / 2 - 2 + (i - 1) * 24);
     }
@@ -317,7 +366,7 @@
     drawHUD();
 
     if(state === 'ready'){
-      drawOverlay(["BIRTHDAY FLAPPY", 'Press Space or Tap to Start']);
+      drawOverlay(["MEADOW FLIGHT", 'Press Space or Tap to Begin']);
     } else if(state === 'gameover'){
       drawOverlay(['GAME OVER', 'Score ' + Math.floor(score) + '  ·  Best ' + getHighScore(), 'Tap / Space to Retry']);
     }
@@ -352,7 +401,7 @@
   function renderLeaderboard(rows){
     leaderboardList.innerHTML = '';
     if(rows === null){
-      leaderboardStatus.textContent = '🔌 Leaderboard isn’t connected yet — finish the Firebase step in the README to turn it on.';
+      leaderboardStatus.textContent = 'The shared journey log is not connected yet. Finish the Firebase setup in the README to turn it on.';
       return;
     }
     if(rows.length === 0){
