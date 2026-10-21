@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&family=Pirata+One&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=storybook-20261022">
+<link rel="stylesheet" href="css/style.css?v=storybook-20261022-memories">
 </head>
 <body class="home-page">
 <div class="ambient-particles" id="ambientParticles" aria-hidden="true"></div>
@@ -61,25 +61,25 @@
       <p>Small moments, becoming the stories we’ll tell for years.</p>
     </div>
     <div class="chapter-grid">
-      <article class="chapter-card reveal">
+      <article class="chapter-card reveal is-selected" data-chapter="0" role="button" tabindex="0" aria-pressed="true" aria-controls="memoryGallery" aria-label="Show Chapter One: The Beginning photo">
         <div class="chapter-number">01</div><div class="chapter-icon" aria-hidden="true">✧</div>
         <p class="chapter-label">Chapter One</p><h3>The Beginning</h3>
         <p>The day Savian arrived, and our own story grew by one wonderful chapter.</p>
         <span class="chapter-date">A new world opened</span>
       </article>
-      <article class="chapter-card reveal">
+      <article class="chapter-card reveal" data-chapter="1" role="button" tabindex="0" aria-pressed="false" aria-controls="memoryGallery" aria-label="Show Chapter Two: First Smiles photo">
         <div class="chapter-number">02</div><div class="chapter-icon" aria-hidden="true">☼</div>
         <p class="chapter-label">Chapter Two</p><h3>First Smiles</h3>
         <p>Little laughs, curious eyes, and the first bright signs of the person he’s becoming.</p>
         <span class="chapter-date">The days grew brighter</span>
       </article>
-      <article class="chapter-card reveal">
+      <article class="chapter-card reveal" data-chapter="2" role="button" tabindex="0" aria-pressed="false" aria-controls="memoryGallery" aria-label="Show Chapter Three: Growing Strong photo">
         <div class="chapter-number">03</div><div class="chapter-icon" aria-hidden="true">⌁</div>
         <p class="chapter-label">Chapter Three</p><h3>Growing Strong</h3>
         <p>New steps, new sounds, and everyday discoveries that felt like great adventures.</p>
         <span class="chapter-date">One brave first at a time</span>
       </article>
-      <article class="chapter-card chapter-card-current reveal">
+      <article class="chapter-card reveal" data-chapter="3" role="button" tabindex="0" aria-pressed="false" aria-controls="memoryGallery" aria-label="Show Chapter Four: The First Adventure photo">
         <div class="chapter-number">04</div><div class="chapter-icon" aria-hidden="true">⚔</div>
         <p class="chapter-label">Chapter Four</p><h3>The First Adventure</h3>
         <p>Today we celebrate one whole year—and all the unwritten pages still ahead.</p>
@@ -94,11 +94,17 @@
       <h2 id="gallery-title">Keepsakes from the journey</h2>
       <p>Four glimpses of the little adventurer who made this year ours.</p>
     </div>
-    <div class="memory-grid">
-      <figure class="memory-card memory-tall reveal"><img src="assets/img/baby-1.png" alt="Savian in a happy first-year portrait" loading="lazy"><figcaption><span>Memory I</span> A bright beginning</figcaption></figure>
-      <figure class="memory-card memory-offset reveal"><img src="assets/img/baby-2.png" alt="Savian looking curiously to the side" loading="lazy"><figcaption><span>Memory II</span> A world to wonder at</figcaption></figure>
-      <figure class="memory-card reveal"><img src="assets/img/baby-3.png" alt="Savian sharing a little smile" loading="lazy"><figcaption><span>Memory III</span> The sound of laughter</figcaption></figure>
-      <figure class="memory-card memory-offset reveal"><img src="assets/img/baby-4.png" alt="Savian ready for another little adventure" loading="lazy"><figcaption><span>Memory IV</span> Onward, little hero</figcaption></figure>
+    <div class="memory-viewer reveal" id="memoryGallery" aria-live="polite">
+      <figure class="memory-feature">
+        <img id="featuredMemory" src="assets/img/memory-1.jpg" alt="Savian in a blue cap and red top, Chapter One: The Beginning" fetchpriority="high">
+        <figcaption><span id="memoryChapter">Chapter One</span><strong id="memoryCaption">The Beginning</strong></figcaption>
+      </figure>
+      <div class="memory-thumbnails" aria-label="Choose a keepsake photo">
+        <button class="memory-thumb is-active" type="button" data-memory="0" aria-label="Show Chapter One photo" aria-pressed="true"><img src="assets/img/memory-1.jpg" alt="" loading="lazy"></button>
+        <button class="memory-thumb" type="button" data-memory="1" aria-label="Show Chapter Two photo" aria-pressed="false"><img src="assets/img/memory-2.jpg" alt="" loading="lazy"></button>
+        <button class="memory-thumb" type="button" data-memory="2" aria-label="Show Chapter Three photo" aria-pressed="false"><img src="assets/img/memory-3.jpg" alt="" loading="lazy"></button>
+        <button class="memory-thumb" type="button" data-memory="3" aria-label="Show Chapter Four photo" aria-pressed="false"><img src="assets/img/memory-4.jpg" alt="" loading="lazy"></button>
+      </div>
     </div>
     <p class="gallery-note"><span aria-hidden="true">✿</span> More pages—and more pictures—to come.</p>
   </section>
@@ -129,6 +135,6 @@
 </main>
 
 <footer class="site-footer"><a href="index.html">Savian's First Chapter</a><span>Made with love for Savian Art A. Serga</span><a href="game.html">Take a little flight <span aria-hidden="true">↗</span></a></footer>
-<script src="js/site.js?v=storybook-20261022"></script>
+<script src="js/site.js?v=storybook-20261022-memories"></script>
 </body>
 </html>
